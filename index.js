@@ -46,10 +46,10 @@ async function loadNewCatalog() {
 
     await Promise.all(providers.map(async provider => {
         if (provider.regions.movie) {
-            movies[provider.id] = await addon.getMetas(MOVIE, [provider.id], provider.regions.movie);
+            movies[provider.id] = await addon.getMetas(MOVIE, [provider.id], provider.regions.movie, provider.language);
         }
         if (provider.regions.show) {
-            series[provider.id] = await addon.getMetas(SHOW, [provider.id], provider.regions.show);
+            series[provider.id] = await addon.getMetas(SHOW, [provider.id], provider.regions.show, provider.language);
         }
     }));
 
@@ -216,7 +216,7 @@ app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, 'vue', 'dist', 'index.html'));
 });
 
-// loadNewCatalog();
+loadNewCatalog();
 setInterval(loadNewCatalog, process.env.REFRESH_INTERVAL || 21600000);
 
 const port = process.env.PORT || 7700;
