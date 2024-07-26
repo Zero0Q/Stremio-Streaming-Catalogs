@@ -64,7 +64,6 @@ app.get('/:configuration/manifest.json', (req, res) => {
     // parse config
     const buffer = Buffer(req.params?.configuration || '', 'base64');
     const [selectedProviders, rpdbKey, countryCode, installedAt] = buffer.toString('ascii')?.split(':');
-
     mixpanel && mixpanel.track('install', {
         ip: req.ip,
         distinct_id: req.ip.replace(/\.|:/g, 'Z'),
@@ -77,7 +76,7 @@ app.get('/:configuration/manifest.json', (req, res) => {
 
     let catalogs = [];
 
-    selectedProviders.forEach(providerId => {
+    selectedProviders.split(',').forEach(providerId => {
         const provider = providers.find(p => p.id === providerId);
         if (provider) {
             if (provider.regions?.movie) {
@@ -133,7 +132,7 @@ app.get('/:configuration?/catalog/:type/:id/:extra?.json', (req, res) => {
         ip: req.ip,
         distinct_id: req.ip.replace(/\.|:/g, 'Z'),
         configuration: req.params?.configuration,
-        selectedProviders,
+        selectedProviders:selectedProviders.split(','),
         rpdbKey,
         countryCode,
         installedAt,
@@ -217,7 +216,7 @@ app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, 'vue', 'dist', 'index.html'));
 });
 
-loadNewCatalog();
+// loadNewCatalog();
 setInterval(loadNewCatalog, process.env.REFRESH_INTERVAL || 21600000);
 
 const port = process.env.PORT || 7700;

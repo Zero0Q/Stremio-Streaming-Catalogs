@@ -33,7 +33,7 @@
                             <form class="space-y-6" @submit.prevent="installAddon">
                                 <div>
                                     <p class="text-gray-500 mb-1">Filter providers by country:</p>
-                                    <select v-model="state.country"
+                                    <select v-model="selectedCountry" @change="updateCountry"
                                         class="w-full text-gray-200 text-sm px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:border-purple-400">
                                         <option v-for="country in getCountries()" :key="country" :value="country">
                                             {{ country }}
@@ -41,7 +41,7 @@
                                     </select>
                                 </div>
                                 <div class="grid grid-cols-4 grid-rows-2 gap-2">
-                                    <Popper v-for="provider in providers" :key="provider.id" v-show="showProvider('provider.id')" hover :content="provider.name">
+                                    <Popper v-for="provider in providers" :key="provider.id" v-show="showProvider(provider.id)" hover :content="provider.name">
                                         <img :src="provider.img" @click="toggle(provider.id)" class="rounded-xl"
                                             :class="!isActive(provider.id) ? 'inactive' : ''" role="button" />
                                     </Popper>
@@ -81,7 +81,7 @@
 </template>
 
 <script setup>
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, ref } from 'vue';
 import regionsToCountries from './regions-to-countries.json'
 import VButton from "./components/VButton.vue";
 import VInput from "./components/VInput.vue";
@@ -95,6 +95,13 @@ const state = reactive({
     timeStamp: null,
     addonUrl: '',
 });
+
+const selectedCountry = ref(state.country);
+
+function updateCountry() {
+  state.country = selectedCountry.value;
+}
+
 
 function openUrl(url) {
     window.open(url, '_blank', 'noopener');
@@ -114,11 +121,12 @@ function getCountries() {
 }
 
 function getCountry() {
-    return regionsToCountries[Intl?.DateTimeFormat()?.resolvedOptions()?.timeZone] || 'Any';
+    const country = regionsToCountries[Intl?.DateTimeFormat()?.resolvedOptions()?.timeZone] || 'Any';
+    return country;
 }
 
 function showProvider(provider) {
-    return state.providers.includes(provider) || regions.find(r=>r.name === state.country).providers;
+    return state.providers.includes(provider) || regions.find(r=>r.name === state.country).providers.includes(provider);
 }
 
 onMounted(() => {
