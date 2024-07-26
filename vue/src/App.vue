@@ -41,94 +41,11 @@
                                     </select>
                                 </div>
                                 <div class="grid grid-cols-4 grid-rows-2 gap-2">
-                                    <Popper v-show="showProvider('nfx')" hover content="Netflix">
-                                        <img src="/netflix.webp" @click="toggle('nfx')" class="rounded-xl"
-                                            :class="!isActive('nfx') ? 'inactive' : ''" role="button" />
+                                    <Popper v-for="provider in providers" :key="provider.id" v-show="showProvider('provider.id')" hover :content="provider.name">
+                                        <img :src="provider.img" @click="toggle(provider.id)" class="rounded-xl"
+                                            :class="!isActive(provider.id) ? 'inactive' : ''" role="button" />
                                     </Popper>
-                                    <Popper v-show="showProvider('hbm')" hover content="HBO Max">
-                                        <img src="/hbo.webp" @click="toggle('hbm')" class="rounded-xl"
-                                            :class="!isActive('hbm') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('dnp')" hover content="Disney+">
-                                        <img src="/disney.webp" @click="toggle('dnp')" class="rounded-xl"
-                                            :class="!isActive('dnp') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('amp')" hover content="Prime Video">
-                                        <img src="/prime.webp" @click="toggle('amp')" class="rounded-xl"
-                                            :class="!isActive('amp') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('atp')" hover content="Apple TV+">
-                                        <img src="/apple.webp" @click="toggle('atp')" class="rounded-xl"
-                                            :class="!isActive('atp') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('pmp')" hover content="Paramount+">
-                                        <img src="/paramount.webp" @click="toggle('pmp')" class="rounded-xl"
-                                            :class="!isActive('pmp') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('pcp')" hover content="Peacock Premium">
-                                        <img src="/peacock.webp" @click="toggle('pcp')" class="rounded-xl"
-                                            :class="!isActive('pcp') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('hlu')" hover content="Hulu">
-                                        <img src="/hulu.webp" @click="toggle('hlu')" class="rounded-xl"
-                                            :class="!isActive('hlu') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('cts')" hover content="Curiosity Stream">
-                                        <img src="/curiositystream.webp" @click="toggle('cts')" class="rounded-xl"
-                                            :class="!isActive('cts') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('mgl')" hover content="MagellanTV">
-                                        <img src="/magellan.webp" @click="toggle('mgl')" class="rounded-xl"
-                                            :class="!isActive('mgl') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('fmn')" hover content="Funimation Now">
-                                        <img src="/funimation.webp" @click="toggle('fmn')" class="rounded-xl"
-                                            :class="!isActive('fmn') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('hay')" hover content="Hayu">
-                                        <img src="/hayu.webp" @click="toggle('hay')" class="rounded-xl"
-                                            :class="!isActive('hay') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('clv')" hover content="Clarovideo">
-                                        <img src="/claro.webp" @click="toggle('clv')" class="rounded-xl"
-                                            :class="!isActive('clv') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('gop')" hover content="Globoplay">
-                                        <img src="/globo.webp" @click="toggle('gop')" class="rounded-xl"
-                                            :class="!isActive('gop') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('hst')" hover content="Hotstar">
-                                        <img src="/hotstar.webp" @click="toggle('hst')" class="rounded-xl"
-                                            :class="!isActive('hst') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('zee')" hover content="Zee5">
-                                        <img src="/zee5.webp" @click="toggle('zee')" class="rounded-xl"
-                                            :class="!isActive('zee') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('nlz')" hover content="NLZIET">
-                                        <img src="/nlziet.webp" @click="toggle('nlz')" class="rounded-xl"
-                                            :class="!isActive('nlz') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('vil')" hover content="Videoland">
-                                        <img src="/videoland.webp" @click="toggle('vil')" class="rounded-xl"
-                                            :class="!isActive('vil') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('sst')" hover content="SkyShowtime">
-                                        <img src="/skyshowtime.webp" @click="toggle('sst')" class="rounded-xl"
-                                            :class="!isActive('sst') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('blv')" hover content="BluTV">
-                                        <img src="/blu.webp" @click="toggle('blv')" class="rounded-xl"
-                                            :class="!isActive('blv') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('cpd')" hover content="Canal+">
-                                        <img src="/canal-plus.webp" @click="toggle('cpd')" class="rounded-xl"
-                                            :class="!isActive('cpd') ? 'inactive' : ''" role="button" />
-                                    </Popper>
-                                    <Popper v-show="showProvider('dpe')" hover content="Discovery+">
-                                        <img src="/discovery-plus.webp" @click="toggle('dpe')" class="rounded-xl"
-                                            :class="!isActive('dpe') ? 'inactive' : ''" role="button" />
-                                    </Popper>
+                                    
                                 </div>
 
                                 <div class="flex">
@@ -168,114 +85,12 @@ import { reactive, onMounted } from 'vue';
 import regionsToCountries from './regions-to-countries.json'
 import VButton from "./components/VButton.vue";
 import VInput from "./components/VInput.vue";
-
-const regions = {
-    'United States': [
-        'nfx',
-        'dnp',
-        'amp',
-        'atp',
-        'hbm',
-        'pmp',
-        'mgl',
-        'cts',
-        'fmn',
-        'hlu',
-        'pcp',
-        'dpe',
-    ],
-    'Brazil': [
-        'nfx',
-        'dnp',
-        'atp',
-        'amp',
-        'pmp',
-        'hbm',
-        'fmn',
-        'clv',
-        'gop',
-        'mgl',
-        'cts',
-    ],
-    'India': [
-        'hay',
-        'nfx',
-        'atp',
-        'amp',
-        'zee',
-        'hst',
-        'mgl',
-        'cts',
-        'dpe',
-    ],
-    'Turkey': [
-        'nfx',
-        'dnp',
-        'atp',
-        'amp',
-        'blv',
-        'mgl',
-        'cts',
-    ],
-    'Netherlands': [
-        'nfx',
-        'dnp',
-        'amp',
-        'atp',
-        'hbm',
-        'hay',
-        'vil',
-        'sst',
-        'mgl',
-        'cts',
-        'nlz',
-        'dpe',
-    ],
-    'France': [
-        'nfx',
-        'dnp',
-        'amp',
-        'atp',
-        'hbm',
-        'hay',
-        'cpd',
-    ],
-    'Any': [
-        'nfx',
-        'dnp',
-        'amp',
-        'atp',
-        'hbm',
-        'pmp',
-        'hlu',
-        'pcp',
-        'clv',
-        'gop',
-        'blv',
-        'zee',
-        'hst',
-        'hay',
-        'vil',
-        'sst',
-        'mgl',
-        'cts',
-        'fmn',
-        'nlz',
-        'cpd',
-        'dpe',
-    ],
-};
+import {providers, regions} from "./providers";
 
 const state = reactive({
     country: getCountry(),
     rpdbKey: '',
-    providers: [
-        'nfx',
-        'dnp',
-        'amp',
-        'atp',
-        'hbm',
-    ],
+    providers: providers.filter(provider=>provider.default).map(provider=>provider.id),
     countryCode: null,
     timeStamp: null,
     addonUrl: '',
@@ -286,26 +101,16 @@ function openUrl(url) {
 }
 
 function getCountryCodeFromCountry(country) {
-    switch (country) {
-        case 'Netherlands':
-            return 'nl';
-        case 'United States':
-            return 'us';
-        case 'Turkey':
-            return 'tr';
-        case 'Brazil':
-            return 'br';
-        case 'India':
-            return 'in';
-        case 'France':
-            return 'fr';
-        default:
-            return '';
+    const code = regions.find(region => region.name === country)?.id;
+    
+    if(code) {
+        return code;
     }
+    return '';
 }
 
 function getCountries() {
-    return Object.keys(regions);
+    return regions.map(region=>region.name);
 }
 
 function getCountry() {
@@ -313,7 +118,7 @@ function getCountry() {
 }
 
 function showProvider(provider) {
-    return state.providers.includes(provider) || regions?.[state.country]?.includes(provider);
+    return state.providers.includes(provider) || regions.find(r=>r.name === state.country).providers;
 }
 
 onMounted(() => {
