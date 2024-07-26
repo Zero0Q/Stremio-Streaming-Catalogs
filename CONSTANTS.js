@@ -1,3 +1,8 @@
 export const MOVIE = 'MOVIE';
 export const SHOW = 'SHOW';
 export const SERIES = 'SERIES';
+
+export const APP_ID = 'np.com.thessubedi.streaming-catalog';
+
+export const APP_LOGO = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/65a65d5c-b4f6-4e4b-817e-9011e62928e1/dezcphh-964b78b6-652a-4284-af68-78d19abc0887.jpg/v1/fill/w_1280,h_960,q_75,strp/streaming_service_logo_drawings_by_minecraftman1000_dezcphh-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9OTYwIiwicGF0aCI6IlwvZlwvNjVhNjVkNWMtYjRmNi00ZTRiLTgxN2UtOTAxMWU2MjkyOGUxXC9kZXpjcGhoLTk2NGI3OGI2LTY1MmEtNDI4NC1hZjY4LTc4ZDE5YWJjMDg4Ny5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.PgqZgvwabd8lPjZKVET_1yCGGbpsMrG3QNS4g3BdPVE"
+export const APP_VERSION = "1.0.0";

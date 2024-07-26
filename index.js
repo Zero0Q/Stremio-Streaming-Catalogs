@@ -6,7 +6,8 @@ import path from 'path';
 import fs from 'fs';
 import addon from './addon.js';
 import { providers } from './data/providers.js';
-import { MOVIE, SERIES, SHOW } from './CONSTANTS.js';
+import { MOVIE, SERIES, SHOW, APP_ID, APP_LOGO, APP_VERSION } from './CONSTANTS.js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -98,10 +99,10 @@ app.get('/:configuration/manifest.json', (req, res) => {
     
     // show catalogs for providers
     res.send({
-        id: 'pw.ers.netflix-catalog',
-        logo: 'https://play-lh.googleusercontent.com/TBRwjS_qfJCSj1m7zZB93FnpJM5fSpMA_wUlFDLxWAb45T9RmwBvQd5cWR5viJJOhkI',
-        version: process.env.npm_package_version,
-        name: 'Streaming Catalogs',
+        id: APP_ID,
+        logo: APP_LOGO,
+        version: APP_VERSION,
+        name: 'All Streaming Catalogs',
         description: 'Your favourite streaming services!',
         catalogs: catalogs,
         resources: ['catalog'],
@@ -194,10 +195,10 @@ app.get('/manifest.json', function (req, res) {
     })
 
     res.send({
-        id: 'pw.ers.netflix-catalog',
-        logo: 'https://play-lh.googleusercontent.com/TBRwjS_qfJCSj1m7zZB93FnpJM5fSpMA_wUlFDLxWAb45T9RmwBvQd5cWR5viJJOhkI',
-        version: process.env.npm_package_version,
-        name: 'Streaming Catalogs',
+        id: APP_ID,
+        logo: APP_LOGO,
+        version: APP_VERSION,
+        name: 'All Streaming Catalogs',
         description: 'Trending movies and series on Netflix, HBO Max, Disney+, Apple TV+ and more. Configure to choose your favourite services.',
         catalogs: defaultCatelogs,
         resources: ['catalog'],
