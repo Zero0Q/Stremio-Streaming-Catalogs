@@ -21,9 +21,9 @@ export default {
         let res = null;
         try {
             res = await axios.post('https://apis.justwatch.com/graphql', {
-                "operationName": "GetNewestTitles",
+                "operationName": "GetDigitalTitles",
                 "variables": {
-                    "popularTitlesSortBy": "NEWEST",
+                    "popularTitlesSortBy": "DIGITAL",
                     "first": AMOUNT,
                     "platform": "WEB",
                     "sortRandomSeed": 0,
@@ -50,74 +50,7 @@ export default {
                     "language": language,
                     "country": country
                 },
-                "query": `query GetNewestTitles(
-  $country: Country!
-  $popularTitlesFilter: TitleFilter
-  $popularAfterCursor: String
-  $popularTitlesSortBy: PopularTitlesSorting! = NEWEST
-  $first: Int!
-  $language: Language!
-  $offset: Int = 0
-  $sortRandomSeed: Int! = 0
-  $profile: PosterProfile
-  $backdropProfile: BackdropProfile
-  $format: ImageFormat
-) {
-  popularTitles(
-    country: $country
-    filter: $popularTitlesFilter
-    offset: $offset
-    after: $popularAfterCursor
-    sortBy: $popularTitlesSortBy
-    first: $first
-    sortRandomSeed: $sortRandomSeed
-  ) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasPreviousPage
-      hasNextPage
-      __typename
-    }
-    edges {
-      ...PopularTitleGraphql
-      __typename
-    }
-    __typename
-  }
-}
-
-fragment PopularTitleGraphql on PopularTitlesEdge {
-  cursor
-  node {
-    id
-    objectId
-    objectType
-    content(country: $country, language: $language) {
-      externalIds {
-        imdbId
-      }
-      title
-      fullPath
-      scoring {
-        imdbScore
-        __typename
-      }
-      posterUrl(profile: $profile, format: $format)
-      ... on ShowContent {
-        backdrops(profile: $backdropProfile, format: $format) {
-          backdropUrl
-          __typename
-        }
-        __typename
-      }
-      __typename
-    }
-    __typename
-  }
-  __typename
-}`
+                "query": "query GetPopularTitles(\n  $country: Country!\n  $popularTitlesFilter: TitleFilter\n  $popularAfterCursor: String\n  $popularTitlesSortBy: PopularTitlesSorting! = POPULAR\n  $first: Int!\n  $language: Language!\n  $offset: Int = 0\n  $sortRandomSeed: Int! = 0\n  $profile: PosterProfile\n  $backdropProfile: BackdropProfile\n  $format: ImageFormat\n) {\n  popularTitles(\n    country: $country\n    filter: $popularTitlesFilter\n    offset: $offset\n    after: $popularAfterCursor\n    sortBy: $popularTitlesSortBy\n    first: $first\n    sortRandomSeed: $sortRandomSeed\n  ) {\n    totalCount\n    pageInfo {\n      startCursor\n      endCursor\n      hasPreviousPage\n      hasNextPage\n      __typename\n    }\n    edges {\n      ...PopularTitleGraphql\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment PopularTitleGraphql on PopularTitlesEdge {\n  cursor\n  node {\n    id\n    objectId\n    objectType\n    content(country: $country, language: $language) {\n      externalIds {\n        imdbId\n      }\n      title\n      fullPath\n      scoring {\n        imdbScore\n        __typename\n      }\n      posterUrl(profile: $profile, format: $format)\n      ... on ShowContent {\n        backdrops(profile: $backdropProfile, format: $format) {\n          backdropUrl\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  __typename\n}"
             });
         } catch (e) {
             console.error("ERROR MESSAGE-------------------------", e.message);
@@ -142,7 +75,7 @@ fragment PopularTitleGraphql on PopularTitlesEdge {
                 imdbId = DUPES_CACHE[imdbId];
             } else if (index < AMOUNT_TO_VERIFY && this.verify) {
                 try {
-                    await axios.head(`https://www.imdb.com/title/${imdbId}/`, {maxRedirects: 0, headers: {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/1[...]`
+                    await axios.head(`https://www.imdb.com/title/${imdbId}/`, {maxRedirects: 0, headers: {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'}});
                 } catch(e) {
                     if (e.response?.status === 308) {
                         const newImdbId = e.response?.headers?.['location']?.split('/')?.[2];
