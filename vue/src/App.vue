@@ -80,9 +80,7 @@ const state = reactive({
     providers: providers.filter(provider=>provider.default).map(provider=>provider.id),
     countryCode: null,
     timeStamp: null,
-    addonUrl: '',
-    mergeCatalogs: true,
-    sortByLatest: true
+    addonUrl: ''
 });
 
 const selectedCountry = ref(state.country);
