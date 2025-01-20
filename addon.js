@@ -21,7 +21,7 @@ export default {
         let res = null;
         try {
             res = await axios.post('https://apis.justwatch.com/graphql', {
-                "operationName": "GetDigitalTitles",
+                "operationName": "GetPopularTitles",
                 "variables": {
                     "popularTitlesSortBy": "DIGITAL",
                     "first": AMOUNT,
