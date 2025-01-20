@@ -23,7 +23,7 @@ export default {
             res = await axios.post('https://apis.justwatch.com/graphql', {
                 "operationName": "GetPopularTitles",
                 "variables": {
-                    "popularTitlesSortBy": "NEW",
+                    "popularTitlesSortBy": "NEWEST", // Changed from "NEW" to "NEWEST"
                     "first": AMOUNT,
                     "platform": "WEB",
                     "sortRandomSeed": 0,
@@ -50,7 +50,7 @@ export default {
                     "language": language,
                     "country": country
                 },
-                "query": "query GetPopularTitles(\n  $country: Country!\n  $popularTitlesFilter: TitleFilter\n  $popularAfterCursor: String\n  $popularTitlesSortBy: PopularTitlesSorting! = POPULAR\n  $first: Int!\n  $language: Language!\n  $offset: Int = 0\n  $sortRandomSeed: Int! = 0\n  $profile: PosterProfile\n  $backdropProfile: BackdropProfile\n  $format: ImageFormat\n) {\n  popularTitles(\n    country: $country\n    filter: $popularTitlesFilter\n    offset: $offset\n    after: $popularAfterCursor\n    sortBy: $popularTitlesSortBy\n    first: $first\n    sortRandomSeed: $sortRandomSeed\n  ) {\n    totalCount\n    pageInfo {\n      startCursor\n      endCursor\n      hasPreviousPage\n      hasNextPage\n      __typename\n    }\n    edges {\n      ...PopularTitleGraphql\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment PopularTitleGraphql on PopularTitlesEdge {\n  cursor\n  node {\n    id\n    objectId\n    objectType\n    content(country: $country, language: $language) {\n      externalIds {\n        imdbId\n      }\n      title\n      fullPath\n      scoring {\n        imdbScore\n        __typename\n      }\n      posterUrl(profile: $profile, format: $format)\n      ... on ShowContent {\n        backdrops(profile: $backdropProfile, format: $format) {\n          backdropUrl\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  __typename\n}"
+                "query": "query GetPopularTitles(\n  $country: Country!\n  $popularTitlesFilter: TitleFilter\n  $popularAfterCursor: String\n  $popularTitlesSortBy: PopularTitlesSorting! = NEWEST\n  [...]"
             });
         } catch (e) {
             console.error("ERROR MESSAGE-------------------------", e.message);
@@ -75,7 +75,7 @@ export default {
                 imdbId = DUPES_CACHE[imdbId];
             } else if (index < AMOUNT_TO_VERIFY && this.verify) {
                 try {
-                    await axios.head(`https://www.imdb.com/title/${imdbId}/`, {maxRedirects: 0, headers: {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'}});
+                    await axios.head(`https://www.imdb.com/title/${imdbId}/`, {maxRedirects: 0, headers: {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/1[...]`
                 } catch(e) {
                     if (e.response?.status === 308) {
                         const newImdbId = e.response?.headers?.['location']?.split('/')?.[2];
