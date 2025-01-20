@@ -81,6 +81,8 @@ const state = reactive({
     countryCode: null,
     timeStamp: null,
     addonUrl: '',
+    mergeCatalogs: true,
+    sortByLatest: true
 });
 
 const selectedCountry = ref(state.country);
