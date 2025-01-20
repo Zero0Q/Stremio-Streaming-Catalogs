@@ -23,7 +23,7 @@ export default {
             res = await axios.post('https://apis.justwatch.com/graphql', {
                 "operationName": "GetPopularTitles",
                 "variables": {
-                    "popularTitlesSortBy": "NEWEST",
+                    "popularTitlesSortBy": "NEW",
                     "first": AMOUNT,
                     "platform": "WEB",
                     "sortRandomSeed": 0,
