@@ -133,9 +133,10 @@ export default {
 async function combineAndSortStreamingServices() {
     const combinedServices = [];
     const countries = ['GB', 'US', 'NL', 'IN', 'BR', 'TR', 'FR'];
+    const providers = ['nfx'];  // Define your providers here
 
     for (const country of countries) {
-        const metas = await addon.getMetas(MOVIE, providers.map(p => p.id), country);
+        const metas = await addon.getMetas(MOVIE, providers, country);
         metas.forEach(meta => {
             combinedServices.push({ ...meta, installedAt: new Date() });
         });
