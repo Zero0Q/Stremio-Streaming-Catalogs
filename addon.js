@@ -75,7 +75,7 @@ export default {
                 imdbId = DUPES_CACHE[imdbId];
             } else if (index < AMOUNT_TO_VERIFY && this.verify) {
                 try {
-                    await axios.head(`https://www.imdb.com/title/${imdbId}/`, {maxRedirects: 0, headers: {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/1...`
+                    await axios.head(`https://www.imdb.com/title/${imdbId}/`, {maxRedirects: 0, headers: {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/1...`);
                 } catch(e) {
                     if (e.response?.status === 308) {
                         const newImdbId = e.response?.headers?.['location']?.split('/')?.[2];
@@ -120,7 +120,6 @@ export default {
                 metasResults.push(result.value);
             }else {
                 console.log("rejected----------------------------------------",result.reason.message);
-
             }
         })
 
